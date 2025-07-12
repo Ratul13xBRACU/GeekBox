@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-4">
+  <h1 class="text-black">{{ showcase.title }}</h1>
+  <p><strong>Category:</strong> {{ showcase.category }}</p>
+  <p><strong>Components:</strong></p>
+  <p>{{ showcase.components | replace('\n', '<br>') | safe }}</p>
+
+  {% if images %}
+  <div class="row">
+    {% for img in images %}
+    <div class="col-md-4 mb-3">
+      <img src="{{ url_for('static', filename='uploads/' + img) }}" class="img-fluid rounded" alt="Showcase image">
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <a href="{{ url_for('showcase') }}" class="btn btn-outline-secondary mt-3">Back to Showcases</a>
+</div>
+{% endblock %}

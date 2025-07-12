@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GeekBox</title>
+  <!-- Tailwind CSS and daisyUI CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      plugins: [daisyui],
+      daisyui: {
+        themes: [
+          "pastel" + " --default",   // pastel as default (light)
+          "coffee" + " --prefersdark" // coffee as dark
+        ]
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css">
+</head>
+<body class="bg-base-100 text-base-content min-h-screen">
+
+  <div class="navbar bg-base-200 shadow-md px-4">
+    <div class="flex-1">
+      <a class="btn btn-ghost text-4xl font-extrabold text-orange-500 tracking-wide" href="{{ url_for('index') }}">GeekBox</a>
+    </div>
+    <div class="flex-none flex items-center gap-2">
+      <div class="dropdown mb-0">
+        <div tabindex="0" role="button" class="btn m-1">
+          Theme
+          <svg
+            width="12px"
+            height="12px"
+            class="inline-block h-2 w-2 fill-current opacity-60"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 2048 2048">
+            <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+          </svg>
+        </div>
+        <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-1 w-52 p-2 shadow-2xl">
+          <li>
+            <input
+              type="radio"
+              name="theme-dropdown"
+              class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
+              aria-label="Default"
+              value="default" />
+          </li>
+          <li>
+            <input
+              type="radio"
+              name="theme-dropdown"
+              class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
+              aria-label="Retro"
+              value="retro" />
+          </li>
+          <li>
+            <input
+              type="radio"
+              name="theme-dropdown"
+              class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
+              aria-label="Light"
+              value="valentine" />
+          </li>
+        </ul>
+      </div>
+      <ul class="menu menu-horizontal px-1">
+        <li><a href="{{ url_for('pc_builders') }}">PC Builders</a></li>
+        <li><a href="{{ url_for('audiophiles') }}">Audiophiles</a></li>
+        <li><a href="{{ url_for('keyboards') }}">Keyboards</a></li>
+        <li><a href="{{ url_for('smart_home') }}">Smart Home</a></li>
+        <li><a href="{{ url_for('products') }}">Products</a></li>
+        <li><a href="{{ url_for('showcase') }}">Showcase</a></li>
+        {% if current_user.is_authenticated %}
+          {% if current_user.role == 'admin' %}
+          <li><a href="{{ url_for('add_products') }}">+ Product</a></li>
+          {% endif %}
+          <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        {% else %}
+          <li><a href="{{ url_for('login') }}">Login</a></li>
+          <li><a href="{{ url_for('register') }}">Register</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto py-6 px-2">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} mb-4">
+          <span>{{ message }}</span>
+          <button type="button" class="btn btn-sm btn-ghost float-right" onclick="this.parentElement.remove()">✕</button>
+        </div>
+      {% endfor %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <script>
+    // On page load, set theme from localStorage if available
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      // Set the correct radio button as checked
+      document.querySelectorAll('.theme-controller').forEach(el => {
+        if (el.value === savedTheme) el.checked = true;
+      });
+    }
+
+    // Listen for theme changes and save to localStorage
+    document.querySelectorAll('.theme-controller').forEach(el => {
+      el.addEventListener('change', function() {
+        if (this.checked) {
+          document.documentElement.setAttribute('data-theme', this.value);
+          localStorage.setItem('theme', this.value);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

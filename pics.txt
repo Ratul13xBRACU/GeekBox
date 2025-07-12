@@ -1,0 +1,19 @@
+<img src="https://i.ibb.co/kgqPnjz1/buyguide.png" alt="buyguide" border="0">
+<img src="https://i.ibb.co/MkN4bDgh/showcase.jpg" alt="showcase" border="0">
+<img src="https://i.ibb.co/5XkRZGBD/cpugpu.jpg" alt="cpugpu" border="0">
+<img src="https://i.ibb.co/V0LSWwDv/parts.jpg" alt="parts" border="0">
+
+<img src="https://i.ibb.co/9HsGyvqr/speaker.jpg" alt="speaker" border="0">
+<img src="https://i.ibb.co/4ZgyHk8B/budget.png" alt="budget" border="0">
+<img src="https://i.ibb.co/Z6FcQtQD/eq.jpg" alt="eq" border="0">
+<img src="https://i.ibb.co/gMYCn3QS/head.jpg" alt="head" border="0">
+
+<img src="https://i.ibb.co/pjK9sY0b/alexa.jpg" alt="alexa" >
+<img src="https://i.ibb.co/67SQbKXZ/iot.png" alt="iot" >
+<img src="https://i.ibb.co/TDTLSLDs/ifttt.jpg" alt="ifttt" >
+<img src="https://i.ibb.co/b5ZtS98c/home.jpg" alt="home" >
+
+<img src="https://i.ibb.co/5gYnRwJq/tester.png" alt="tester" >
+<img src="https://i.ibb.co/7NxkcJw5/layout.png" alt="layout" >
+<img src="https://i.ibb.co/2392rpvv/show.jpg" alt="show" >
+<img src="https://i.ibb.co/C5YqnPbw/caps.jpg" alt="caps" >

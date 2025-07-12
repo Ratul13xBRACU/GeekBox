@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-4">
+
+  <h1 class="mb-4 text-black">Showcase</h1>
+
+  <a href="{{ url_for('create_showcase') }}" class="btn btn-warning mb-4" style="background-color: orange; border: none;">
+    + Create Showcase
+  </a>
+
+  <div class="flex flex-wrap gap-6 justify-start">
+    {% for sc in showcases %}
+      <div>
+        <div class="card bg-base-100 w-96 shadow-sm">
+          <a href="{{ url_for('showcase_detail', showcase_id=sc.id) }}">
+            <figure>
+              {% set first_img = sc.image_filenames.split(',')[0] if sc.image_filenames else '' %}
+              {% if first_img %}
+                <img src="{{ url_for('static', filename='uploads/' + first_img) }}" alt="{{ sc.title }}" class="object-cover w-full h-52" />
+              {% else %}
+                <div class="flex items-center justify-center bg-base-200 w-full h-52">
+                  <span class="text-base-content/50">No image</span>
+                </div>
+              {% endif %}
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">{{ sc.title }}</h2>
+              <p>
+                <strong>Recommended For:</strong>
+                <span class="text-primary">{{ sc.category }}</span>
+              </p>
+              <p class="truncate">{{ sc.components }}</p>
+              <div class="card-actions justify-end">
+                <button class="btn btn-primary">View Details</button>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    {% else %}
+      <p class="text-black">No showcases found.</p>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

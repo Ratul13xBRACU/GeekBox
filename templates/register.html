@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex justify-center items-center min-h-[60vh]">
+  <form method="POST" class="w-full max-w-xs">
+    {{ form.hidden_tag() }}
+    <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+      <legend class="fieldset-legend">Register</legend>
+
+      <label class="label">{{ form.username.label.text }}</label>
+      {{ form.username(class="input input-bordered w-full mb-2", placeholder="Username") }}
+
+      <label class="label">{{ form.email.label.text }}</label>
+      {{ form.email(class="input input-bordered w-full mb-2", placeholder="Email") }}
+
+      <label class="label">{{ form.password.label.text }}</label>
+      {{ form.password(class="input input-bordered w-full mb-2", placeholder="Password") }}
+
+      <label class="label">{{ form.role.label.text }}</label>
+      {{ form.role(class="select select-bordered w-full mb-2") }}
+
+      <button class="btn btn-neutral mt-4 w-full" type="submit">Register</button>
+    </fieldset>
+  </form>
+</div>
+{% endblock %}

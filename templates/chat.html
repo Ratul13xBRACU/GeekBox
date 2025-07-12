@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat - {{ category }}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      background-color: #fff; /* white background */
+      color: #000; /* black text */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Navbar styles from your theme */
+    nav.navbar {
+      background-color: #000; /* black */
+    }
+    nav.navbar .navbar-brand {
+      color: #ff6600; /* orange */
+      font-weight: 700;
+    }
+    nav.navbar .nav-link {
+      color: #fff;
+    }
+    nav.navbar .nav-link:hover {
+      color: #ff6600;
+    }
+
+    #chat-container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 1200px;  /* wider container */
+      margin: 1rem auto;
+      width: calc(100% - 2rem);
+      padding: 1rem 2rem;
+      background-color: #f9f9f9; /* light grey */
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 102, 0, 0.4);
+    }
+    h3 {
+      color: #ff6600;
+      text-align: center;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    #chat-box {
+      flex-grow: 1;
+      overflow-y: auto;
+      border: 2px solid #ff6600;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #fff;
+      margin-bottom: 1rem;
+      height: 500px;
+      scrollbar-width: thin;
+      scrollbar-color: #ff6600 #f9f9f9;
+      word-wrap: break-word;
+    }
+    #chat-box::-webkit-scrollbar {
+      width: 8px;
+    }
+    #chat-box::-webkit-scrollbar-track {
+      background: #f9f9f9;
+    }
+    #chat-box::-webkit-scrollbar-thumb {
+      background-color: #ff6600;
+      border-radius: 20px;
+      border: 2px solid #f9f9f9;
+    }
+    .message {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      color: #000;
+    }
+    .message.me {
+      text-align: right;
+      font-weight: 600;
+      color: #6e2f05;
+    }
+    .message.system {
+      text-align: center;
+      font-style: italic;
+      color: #888;
+    }
+    #chat-form {
+      display: flex;
+      gap: 0.5rem;
+    }
+    #message-input {
+      flex-grow: 1;
+      border-radius: 4px;
+      border: 2px solid #943d04;
+      background-color: #fff;
+      color: #000;
+      padding: 0.5rem 0.75rem;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    #message-input::placeholder {
+      color: #aaa;
+    }
+    #message-input:focus {
+      border-color: #ff8533;
+      background-color: #fff;
+    }
+    #send-btn {
+      background-color: #c7570c;
+      border: none;
+      color: white;
+      padding: 0 1.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #send-btn:hover {
+      background-color: #ff893b;
+    }
+    @media (max-width: 576px) {
+      #chat-box {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar copied from your earlier shared template -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black px-3">
+    <a class="navbar-brand text-orange fw-bold" href="{{ url_for('index') }}">GeekBox</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('pc_builders') }}">PC Builders</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('audiophiles') }}">Audiophiles</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('keyboards') }}">Keyboards</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('smart_home') }}">Smart Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('products') }}">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('showcase') }}">Showcase</a></li>
+        {% if current_user.is_authenticated %}
+          {% if current_user.role == 'admin' %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('add_products') }}">+ Product</a></li>
+          {% endif %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+        {% else %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  <div id="chat-container" role="main">
+    <h3>Chat Room: {{ category }}</h3>
+
+    <div id="chat-box" aria-live="polite" aria-relevant="additions" tabindex="0">
+      {% for msg in messages %}
+        <div class="message {% if msg.username == current_user.username %}me{% endif %}">
+          <strong>{{ msg.username }}</strong>: {{ msg.message }}
+        </div>
+      {% endfor %}
+    </div>
+
+    <form id="chat-form" aria-label="Send message form">
+      <input id="message-input" autocomplete="off" placeholder="Type a message..." aria-label="Message input" />
+      <button type="submit" id="send-btn" aria-label="Send message">Send</button>
+    </form>
+  </div>
+
+  <script>
+    const socket = io();
+    const room = "{{ category }}";
+    const currentUser = "{{ current_user.username }}";
+
+    socket.emit('join_room', { room });
+
+    const chatBox = document.getElementById('chat-box');
+    const form = document.getElementById('chat-form');
+    const input = document.getElementById('message-input');
+
+    socket.on('connect', () => {
+      console.log('Connected to Socket.IO');
+    });
+
+    socket.on('message', data => {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message');
+
+      if (data.user === 'System') {
+        messageDiv.classList.add('system');
+        messageDiv.textContent = data.message;
+      } else {
+        if (data.user === currentUser) {
+          messageDiv.classList.add('me');
+        }
+        messageDiv.innerHTML = `<strong>${data.user}</strong>: ${data.message}`;
+      }
+
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const msg = input.value.trim();
+      if (msg !== "") {
+        socket.emit('send_message', { room, message: msg });
+        input.value = '';
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

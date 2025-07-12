@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex flex-col items-center text-center">
+  <h2 class="text-4xl text-orange-500 font-extrabold mb-2">Audiophile Zone</h2>
+  <p class="text-xl font-medium mb-6">Dive into high-fidelity sound with gear picks, DAC/AMP tools, and acoustic tips.</p>
+  <a href="{{ url_for('chat', category='Audio') }}" class="btn btn-primary mb-8">Join Audiophile Chat</a>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl items-stretch">
+    <!-- Audio Gear Selector by Budget -->
+    <div class="card bg-base-100 shadow-xl h-full flex flex-col">
+      <figure><img src="https://i.ibb.co/4ZgyHk8B/budget.png" alt="budget"/></figure>
+      <div class="card-body flex flex-col items-center text-center justify-center flex-1 h-full">
+        <h3 class="card-title">Audio Gear Selector by Budget</h3>
+        <p>Find the best headphones, speakers, and DAC/AMPs for your budget and preferences. Get personalized recommendations.</p>
+        <div class="card-actions justify-end">
+          <a href="https://www.rtings.com/headphones" target="_blank" class="btn btn-outline btn-primary">Find Gear</a>
+        </div>
+      </div>
+    </div>
+    <!-- Headphone & Speaker Reviews -->
+    <div class="card bg-base-100 shadow-xl h-full flex flex-col">
+      <figure><img src="https://i.ibb.co/9HsGyvqr/speaker.jpg" alt="speaker"/></figure>
+      <div class="card-body flex flex-col items-center text-center justify-center flex-1 h-full">
+        <h3 class="card-title">Headphone & Speaker Reviews</h3>
+        <p>Read in-depth reviews and comparisons of the latest headphones and speakers from trusted sources.</p>
+        <div class="card-actions justify-end">
+          <a href="https://www.whathifi.com/best-buys/headphones" target="_blank" class="btn btn-outline btn-primary">Read Reviews</a>
+        </div>
+      </div>
+    </div>
+    <!-- Room Tuning & EQ Guides -->
+    <div class="card bg-base-100 shadow-xl h-full flex flex-col">
+      <figure><img src="https://i.ibb.co/Z6FcQtQD/eq.jpg" alt="eq"/></figure>
+      <div class="card-body flex flex-col items-center text-center justify-center flex-1 h-full">
+        <h3 class="card-title">Room Tuning & EQ Guides</h3>
+        <p>Optimize your listening environment with guides on room acoustics, speaker placement, and equalization.</p>
+        <div class="card-actions justify-end">
+          <a href="https://www.soundguys.com/how-to-equalize-fine-tune-your-listening-experience-16410/" target="_blank" class="btn btn-outline btn-primary">Learn More</a>
+        </div>
+      </div>
+    </div>
+    <!-- Showcase of Custom Audio Setups -->
+    <div class="card bg-base-100 shadow-xl h-full flex flex-col">
+      <figure><img src="https://i.ibb.co/gMYCn3QS/head.jpg" alt="head" /></figure>
+      <div class="card-body flex flex-col items-center text-center justify-center flex-1 h-full">
+        <h3 class="card-title">Showcase of Custom Audio Setups</h3>
+        <p>See unique and inspiring audio setups from the community. Share your own and get feedback!</p>
+        <div class="card-actions justify-end">
+          <a href="https://www.reddit.com/r/audiophile/" target="_blank" class="btn btn-outline btn-primary">View Setups</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

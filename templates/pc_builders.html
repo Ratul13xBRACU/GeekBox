@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex flex-col items-center text-center">
+  <h2 class="text-4xl text-orange-500 font-extrabold mb-2">PC Builders Hub</h2>
+  <p class="text-xl font-medium mb-6">Explore tools, part recommendations, and community builds for custom PC setups.</p>
+  <a href="{{ url_for('chat', category='PC') }}" class="btn btn-primary mb-8">
+    Join PC Builder Chat
+  </a>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
+    <!-- Build Compatibility Checker -->
+    <div class="card bg-base-100 shadow-xl">
+      <figure><img src="https://i.ibb.co/V0LSWwDv/parts.jpg" alt="parts" /></figure>
+      <div class="card-body">
+        <h3 class="card-title">Build Compatibility Checker</h3>
+        <p>Ensure your selected PC parts work together. Instantly check compatibility for CPUs, motherboards, RAM, GPUs, and more.</p>
+        <div class="card-actions justify-end">
+          <a href="https://pcpartpicker.com/list/" target="_blank" class="btn btn-outline btn-primary">Try a Checker</a>
+        </div>
+      </div>
+    </div>
+    <!-- Latest GPUs and CPUs -->
+    <div class="card bg-base-100 shadow-xl">
+      <figure><img src="https://i.ibb.co/5XkRZGBD/cpugpu.jpg" alt="cpugpu" /></figure>
+      <div class="card-body">
+        <h3 class="card-title">Latest GPUs and CPUs</h3>
+        <p>Stay up to date with the newest graphics cards and processors. Compare specs, prices, and performance for your next build.</p>
+        <div class="card-actions justify-end">
+          <a href="https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html" target="_blank" class="btn btn-outline btn-primary">See Latest Parts</a>
+        </div>
+      </div>
+    </div>
+    <!-- User-submitted PC build showcase -->
+    <div class="card bg-base-100 shadow-xl">
+      <figure><img src="https://i.ibb.co/MkN4bDgh/showcase.jpg" alt="showcase"/></figure>
+      <div class="card-body">
+        <h3 class="card-title">User-submitted PC Build Showcase</h3>
+        <p>Browse and get inspired by community-submitted PC builds. Share your own setup and see what others have created!</p>
+        <div class="card-actions justify-end">
+          <a href="{{ url_for('showcase') }}" class="btn btn-outline btn-primary">View Showcase</a>
+        </div>
+      </div>
+    </div>
+    <!-- Buying guides -->
+    <div class="card bg-base-100 shadow-xl">
+      <figure><img src="https://i.ibb.co/kgqPnjz1/buyguide.png" alt="buyguide" /></figure>
+      <div class="card-body">
+        <h3 class="card-title">Buying Guides</h3>
+        <p>Find the best parts for your needs. Guides for students, streamers, gamers, and more—tailored to your budget and goals.</p>
+        <div class="card-actions justify-end">
+          <a href="https://pcbuilderbd.com/category/budget-pc-configuration-buying-guide/" target="_blank" class="btn btn-outline btn-primary">Read Guides</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

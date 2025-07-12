@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex flex-col items-center text-center">
+  <h2 class="text-4xl text-orange-500 font-extrabold mb-2">Mechanical Keyboards</h2>
+  <p class="text-xl font-medium mb-4">Build your dream keyboard — from switches to keycaps and layouts.</p>
+  <a href="{{ url_for('chat', category='Keyboard') }}" class="btn btn-primary mb-4">Join Mechanical Keyboard Chat</a>
+  <div class="mb-6">
+    <!-- <p class="font-semibold">Blue Switch-Nightmare Fuel</p>
+    <audio controls>
+      <source src="static/uploads/blue.mp3" type="audio/mpeg">
+    </audio> -->
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
+    <!-- Switch Tester Simulator -->
+    <div class="card bg-base-100 shadow-xl">
+      <figure><img src="https://i.ibb.co/5gYnRwJq/tester.png" alt="tester" /></figure>
+      <div class="card-body">
+        <h3 class="card-title">Switch Tester Simulator</h3>
+        <p>Try out different switch sounds and feels virtually. Compare tactile, clicky, and linear switches before you buy.</p>
+        <div class="card-actions justify-end">
+          <a href="https://kbs.im/" target="_blank" class="btn btn-outline btn-primary">Simulate</a>
+        </div>
+      </div>
+    </div>
+    <!-- Firmware & Layout Configurators -->
+    <div class="card bg-base-100 shadow-xl">
+      <figure><img src="https://i.ibb.co/7NxkcJw5/layout.png" alt="layout" /></figure>
+      <div class="card-body">
+        <h3 class="card-title">Firmware & Layout Configurators</h3>
+        <p>Customize your keyboard's firmware and layout with tools like VIA and QMK Configurator.</p>
+        <div class="card-actions justify-end">
+          <a href="https://usevia.app/" target="_blank" class="btn btn-outline btn-primary">Try VIA</a>
+          <a href="https://config.qmk.fm/" target="_blank" class="btn btn-outline btn-primary">QMK Configurator</a>
+        </div>
+      </div>
+    </div>
+    <!-- Keycap and Case Guides -->
+    <div class="card bg-base-100 shadow-xl">
+      <figure><img src="https://i.ibb.co/C5YqnPbw/caps.jpg" alt="caps"/></figure>
+      <div class="card-body">
+        <h3 class="card-title">Keycap and Case Guides</h3>
+        <p>Learn about different keycap profiles, materials, and case options to personalize your keyboard's look and feel.</p>
+        <div class="card-actions justify-end">
+          <a href="https://switchandclick.com/keycap-profiles-explained/" target="_blank" class="btn btn-outline btn-primary">Read Guide</a>
+        </div>
+      </div>
+    </div>
+    <!-- Featured Custom Keyboard Builds -->
+    <div class="card bg-base-100 shadow-xl">
+      <figure><img src="https://i.ibb.co/2392rpvv/show.jpg" alt="show"/></figure>
+      <div class="card-body">
+        <h3 class="card-title">Featured Custom Keyboard Builds</h3>
+        <p>Get inspired by unique custom keyboard builds from the community. See photos, specs, and build logs.</p>
+        <div class="card-actions justify-end">
+          <a href="https://www.reddit.com/r/MechanicalKeyboards/" target="_blank" class="btn btn-outline btn-primary">See Builds</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

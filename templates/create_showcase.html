@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex justify-center items-center min-h-[60vh]">
+  <form method="POST" enctype="multipart/form-data" class="w-full max-w-lg">
+    {{ form.hidden_tag() }}
+    <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-full border p-6">
+      <legend class="fieldset-legend text-lg font-semibold mb-4">Create Showcase</legend>
+
+      <label class="label">{{ form.title.label.text }}</label>
+      {{ form.title(class="input input-bordered w-full mb-4") }}
+
+      <label class="label">{{ form.category.label.text }}</label>
+      <div class="flex flex-wrap gap-4 mb-4">
+        {% for subfield in form.category %}
+          <label class="cursor-pointer flex items-center gap-2">
+            {{ subfield(class="checkbox checkbox-primary") }}
+            <span>{{ subfield.label.text }}</span>
+          </label>
+        {% endfor %}
+      </div>
+      {% if form.category.errors %}
+        <div class="text-error text-sm mb-2">{{ form.category.errors[0] }}</div>
+      {% endif %}
+
+      <label class="label">{{ form.components.label.text }}</label>
+      {{ form.components(class="textarea textarea-bordered w-full mb-4", rows="4") }}
+      <span class="text-xs text-gray-500 mb-2 block">New lines will be preserved when viewing your showcase.</span>
+
+      <label class="label">{{ form.images.label.text }}</label>
+      {{ form.images(class="file-input file-input-bordered w-full mb-4", multiple=true) }}
+
+      <button type="submit" class="btn btn-primary w-full mt-2">{{ form.submit.label.text }}</button>
+    </fieldset>
+  </form>
+</div>
+{% endblock %}

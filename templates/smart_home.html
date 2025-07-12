@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex flex-col items-center text-center">
+  <h2 class="text-4xl text-orange-500 font-extrabold mb-2">Smart Home Setups</h2>
+  <p class="text-xl font-medium mb-6">Design and optimize your smart home ecosystem with GeekBox tools and recommendations.</p>
+  <a href="{{ url_for('chat', category='SmartHome') }}" class="btn btn-primary mb-8">Join Smart Home Chat</a>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl items-stretch">
+    <!-- Device Compatibility Checker -->
+    <div class="card bg-base-100 shadow-xl h-full flex flex-col">
+      <figure><img src="https://i.ibb.co/pjK9sY0b/alexa.jpg" alt="alexa"/></figure>
+      <div class="card-body flex flex-col items-center text-center justify-center flex-1 h-full">
+        <h3 class="card-title">Device Compatibility Checker</h3>
+        <p>Check if your smart devices work with Alexa, Google Home, Apple HomeKit, and more. Avoid compatibility headaches!</p>
+        <div class="card-actions justify-end">
+          <a href="https://www.amazon.com/alexasmarthome" target="_blank" class="btn btn-outline btn-primary">Alexa Compatibility</a>
+          <a href="https://assistant.google.com/explore/" target="_blank" class="btn btn-outline btn-primary">Google Assistant Compatibility</a>
+        </div>
+      </div>
+    </div>
+    <!-- Automation Recipe Builder -->
+    <div class="card bg-base-100 shadow-xl h-full flex flex-col">
+      <figure><img src="https://i.ibb.co/TDTLSLDs/ifttt.jpg" alt="ifttt"/></figure>
+      <div class="card-body flex flex-col items-center text-center justify-center flex-1 h-full">
+        <h3 class="card-title">Automation Recipe Builder</h3>
+        <p>Create custom automation routines for your smart home. Connect devices and set triggers for a seamless experience.</p>
+        <div class="card-actions justify-end">
+          <a href="https://ifttt.com/explore" target="_blank" class="btn btn-outline btn-primary">Try IFTTT</a>
+        </div>
+      </div>
+    </div>
+    <!-- Top-rated Smart Plugs, Lights, and Hubs -->
+    <div class="card bg-base-100 shadow-xl h-full flex flex-col">
+      <figure><img src="https://i.ibb.co/67SQbKXZ/iot.png" alt="iot"/></figure>
+      <div class="card-body flex flex-col items-center text-center justify-center flex-1 h-full">
+        <h3 class="card-title">Top-rated Smart Plugs, Lights, and Hubs</h3>
+        <p>Discover the best smart plugs, lights, and hubs for reliability, features, and value. See expert and user reviews.</p>
+        <div class="card-actions justify-end">
+          <a href="https://techshopbd.com/category/iot-device" target="_blank" class="btn btn-outline btn-primary">See iOT Products</a>
+        </div>
+      </div>
+    </div>
+    <!-- User Shared Smart Room Setups -->
+    <div class="card bg-base-100 shadow-xl h-full flex flex-col">
+      <figure><img src="https://i.ibb.co/b5ZtS98c/home.jpg" alt="home"/></figure>
+      <div class="card-body flex flex-col items-center text-center justify-center flex-1 h-full">
+        <h3 class="card-title">User Shared Smart Room Setups</h3>
+        <p>Get inspired by real smart home setups from the community. Share your own and learn new automation ideas!</p>
+        <div class="card-actions justify-end">
+          <a href="https://www.reddit.com/r/smarthome/" target="_blank" class="btn btn-outline btn-primary">View Setups</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

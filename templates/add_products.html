@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex justify-center items-center min-h-[60vh]">
+  <form method="POST" enctype="multipart/form-data" class="w-full max-w-lg">
+    {{ form.hidden_tag() }}
+    <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-full border p-6">
+      <legend class="fieldset-legend text-lg font-semibold mb-4">Add Product</legend>
+
+      <label class="label">{{ form.name.label.text }}</label>
+      {{ form.name(class="input input-bordered w-full mb-4") }}
+
+      <label class="label">{{ form.category.label.text }}</label>
+      {{ form.category(class="select select-bordered w-full mb-4") }}
+
+      <label class="label">{{ form.recommended_for.label.text }}</label>
+      <div class="flex flex-wrap gap-4 mb-4">
+        {% for subfield in form.recommended_for %}
+          <label class="cursor-pointer flex items-center gap-2">
+            {{ subfield(class="checkbox checkbox-primary") }}
+            <span>{{ subfield.label.text }}</span>
+          </label>
+        {% endfor %}
+      </div>
+
+      <label class="label">{{ form.price.label.text }}</label>
+      {{ form.price(class="input input-bordered w-full mb-4", step="0.01") }}
+
+      <label class="label">{{ form.description.label.text }}</label>
+      {{ form.description(class="textarea textarea-bordered w-full mb-4", rows="4") }}
+
+      <label class="label">{{ form.image.label.text }}</label>
+      {{ form.image(class="file-input file-input-bordered w-full mb-4") }}
+
+      <button class="btn btn-primary w-full mt-2" type="submit">Add Product</button>
+    </fieldset>
+  </form>
+</div>
+{% endblock %}
